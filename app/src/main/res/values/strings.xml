@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">NoteApp</string>
+    <string name="empty_image">emptyImage</string>
+    <string name="fab_add_note">floating ActionButton for Add New Note</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="category">Category</string>
+    <string name="priority">Priority</string>
+    <string name="save">Save</string>
+    <string name="search">Search</string>
+    <string name="filter">Filter</string>
+</resources>
