@@ -1,7 +1,6 @@
-package com.github.ebrahimi16153.noteapp.ui.main.note
+package com.github.ebrahimi16153.noteapp.ui.note
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

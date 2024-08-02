@@ -60,6 +60,6 @@
         android:src="@drawable/ic_round_add_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:tint="@color/white" />
+        app:tint="@color/whiteSmoke" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
