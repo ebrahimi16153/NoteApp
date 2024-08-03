@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.note.NoteFragment">
+    tools:context=".ui.note.NoteFragment">
 
     <!--Close-->
     <ImageView
@@ -84,7 +84,7 @@
                 android:layout_width="150dp"
                 android:layout_height="30dp"
                 android:layout_margin="3dp"
-                app:cardBackgroundColor="@color/white"
+                app:cardBackgroundColor="@color/whiteSmoke"
                 app:cardCornerRadius="5dp"
                 app:cardElevation="1dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -124,7 +124,7 @@
                 android:layout_width="150dp"
                 android:layout_height="30dp"
                 android:layout_margin="3dp"
-                app:cardBackgroundColor="@color/white"
+                app:cardBackgroundColor="@color/whiteSmoke"
                 app:cardCornerRadius="5dp"
                 app:cardElevation="1dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -149,7 +149,7 @@
         android:layout_height="55dp"
         android:paddingHorizontal="50dp"
         android:text="@string/save"
-        android:textColor="@color/white"
+        android:textColor="@color/whiteSmoke"
         android:textSize="18sp"
         android:textStyle="bold"
         app:backgroundTint="@color/green"
