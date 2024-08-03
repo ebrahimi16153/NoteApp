@@ -9,4 +9,7 @@
     <string name="save">Save</string>
     <string name="search">Search</string>
     <string name="filter">Filter</string>
+    <string name="close_button">closeButton</string>
+    <string name="category_image">CategoryImage</string>
+    <string name="menu_image">menuImage</string>
 </resources>

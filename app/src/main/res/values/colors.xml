@@ -8,6 +8,8 @@
     <color name="highPriorityColor">@color/red</color>
     <color name="mediumPriorityColor">@color/aqua</color>
     <color name="lowPriorityColor">@color/yellow</color>
+    <color name="container">@color/grayDark</color>
+    <color name="onContainer">@color/darkSlategray70</color>
 
 
 
