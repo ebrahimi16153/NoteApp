@@ -21,7 +21,7 @@
         app:titleCentered="true"
         app:titleTextColor="@color/whiteSmoke" />
 
-    <!--    notesList-->
+    <!--notesList-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/noteList"

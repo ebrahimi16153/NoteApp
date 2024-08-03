@@ -77,7 +77,8 @@
                 android:contentDescription="@string/menu_image"
                 android:src="@drawable/ic_more2"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:tint="@color/onContainer" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
