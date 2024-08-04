@@ -6,7 +6,7 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import com.github.ebrahimi16153.noteapp.R
 
-
+// spinner config
 fun Spinner.setUpSpinnerByAdapter(list: MutableList<String>, item: (String) -> Unit) {
     val adapter = ArrayAdapter(context, R.layout.spinner_item, list)
     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
