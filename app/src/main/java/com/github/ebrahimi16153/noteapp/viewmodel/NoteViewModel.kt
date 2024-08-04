@@ -1,0 +1,36 @@
+package com.github.ebrahimi16153.noteapp.viewmodel
+
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.github.ebrahimi16153.noteapp.data.repository.NoteRepository
+import com.github.ebrahimi16153.noteapp.utils.Constant.EDUCATION
+import com.github.ebrahimi16153.noteapp.utils.Constant.HEALTH
+import com.github.ebrahimi16153.noteapp.utils.Constant.HOME
+import com.github.ebrahimi16153.noteapp.utils.Constant.WORK
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+
+
+@HiltViewModel
+class NoteViewModel @Inject constructor(private val repository: NoteRepository) : ViewModel() {
+
+    val categoryList = MutableLiveData<MutableList<String>>()
+    val priorityList = MutableLiveData<MutableList<String>>()
+
+    // getCategoryData
+    fun loadCategoryData() = viewModelScope.launch(Dispatchers.IO) {
+        val data = mutableListOf(WORK, EDUCATION, HOME, HEALTH)
+        categoryList.postValue(data)
+    }
+
+    //get priority data
+    fun loadPriorityData() = viewModelScope.launch(Dispatchers.IO) {
+        val data = mutableListOf("High", "Medium", "Low")
+        priorityList.postValue(data)
+    }
+
+
+}

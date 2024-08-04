@@ -72,5 +72,9 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.4")
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.8.4")
     ksp ("androidx.lifecycle:lifecycle-common:2.8.4")
+
+    //viewModels()
+    implementation ("androidx.fragment:fragment-ktx:1.8.2")
+    implementation ("androidx.fragment:fragment-ktx:1.8.2")
 }
 
