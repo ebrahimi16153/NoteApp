@@ -12,4 +12,7 @@
     <string name="close_button">closeButton</string>
     <string name="category_image">CategoryImage</string>
     <string name="menu_image">menuImage</string>
+    <string name="delete">Delete</string>
+    <string name="edite">Edite</string>
+    <string name="select_priority">Select Priority</string>
 </resources>

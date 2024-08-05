@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.github.ebrahimi16153.noteapp.data.model.NoteModel
 import com.github.ebrahimi16153.noteapp.databinding.FragmentNoteBinding
+import com.github.ebrahimi16153.noteapp.utils.Constant
 import com.github.ebrahimi16153.noteapp.utils.setUpSpinnerByAdapter
 import com.github.ebrahimi16153.noteapp.viewmodel.NoteViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -33,6 +34,9 @@ class NoteFragment : BottomSheetDialogFragment() {
     @Inject
     lateinit var noteEntity: NoteModel
 
+    //noteId
+    private var noteId = 0
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,6 +50,9 @@ class NoteFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //getNoteId
+        noteId = arguments?.getInt(Constant.ID_KEY) ?: 0
 
 //        initViews
         binding?.apply {
@@ -70,8 +77,16 @@ class NoteFragment : BottomSheetDialogFragment() {
                     priority = item
                 }
             }
+            // if noteId > 0 -> show Note
+            if(noteId>0){
+                viewModel.getNoteByID(noteId)
+                viewModel.noteByID.observe(viewLifecycleOwner){
+                    showExistNote(it)
+                }
+            }
             // Upsert Note
-           upsertNote()
+            upsertNote()
+
 
         }
     }
@@ -79,6 +94,16 @@ class NoteFragment : BottomSheetDialogFragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+
+    private fun showExistNote(noteModel: NoteModel){
+        binding?.apply {
+            titleEdt.setText(noteModel.title)
+            descEdt.setText(noteModel.description)
+            viewModel.categoryList.value?.let {  categoriesSpinner.setSelection(it.indexOf(noteModel.category)) }
+            viewModel.priorityList.value?.let {  prioritySpinner.setSelection(it.indexOf(noteModel.priority)) }
+        }
     }
 
     //save note
@@ -90,6 +115,7 @@ class NoteFragment : BottomSheetDialogFragment() {
                 if (titleEdt.text.isNotEmpty() && descEdt.text.isNotEmpty()) {
 
                     //fill noteEntity
+                    noteEntity.id = noteId
                     noteEntity.title = titleEdt.text.toString()
                     noteEntity.description = descEdt.text.toString()
                     noteEntity.category = category
@@ -98,15 +124,17 @@ class NoteFragment : BottomSheetDialogFragment() {
 
 
                         //save note
-                        Toast.makeText(context, "Note Saved Successfully", Toast.LENGTH_SHORT).show()
-                        viewModel.saveNote(isEdit = false,noteEntity)
+                        Toast.makeText(context, "Note Saved Successfully", Toast.LENGTH_SHORT)
+                            .show()
+                        viewModel.saveNote(isEdit = false, noteEntity)
                         this@NoteFragment.dismiss()
 
-                    }else{
+                    } else {
 
                         //update note
-                        Toast.makeText(context, "Note Updated Successfully", Toast.LENGTH_SHORT).show()
-                        viewModel.saveNote(isEdit = true,noteEntity)
+                        Toast.makeText(context, "Note Updated Successfully", Toast.LENGTH_SHORT)
+                            .show()
+                        viewModel.saveNote(isEdit = true, noteEntity)
                         this@NoteFragment.dismiss()
                     }
 

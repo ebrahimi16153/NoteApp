@@ -11,6 +11,7 @@ import com.github.ebrahimi16153.noteapp.utils.Constant.HOME
 import com.github.ebrahimi16153.noteapp.utils.Constant.WORK
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -20,6 +21,7 @@ class NoteViewModel @Inject constructor(private val repository: NoteRepository) 
 
     val categoryList = MutableLiveData<MutableList<String>>()
     val priorityList = MutableLiveData<MutableList<String>>()
+    val noteByID = MutableLiveData<NoteModel>()
 
     // getCategoryData
     fun loadCategoryData() = viewModelScope.launch(Dispatchers.IO) {
@@ -34,9 +36,16 @@ class NoteViewModel @Inject constructor(private val repository: NoteRepository) 
     }
 
     //save note
-    fun saveNote(isEdit:Boolean ,note:NoteModel) = viewModelScope.launch(Dispatchers.IO) {
+    fun saveNote(isEdit: Boolean, note: NoteModel) = viewModelScope.launch(Dispatchers.IO) {
 
         if (isEdit) repository.updateNote(note) else repository.saveNote(note)
+    }
+
+    //getNoteByID
+    fun getNoteByID(id: Int) = viewModelScope.launch(Dispatchers.IO) {
+        repository.getNote(id).collectLatest {
+            noteByID.postValue(it)
+        }
     }
 
 

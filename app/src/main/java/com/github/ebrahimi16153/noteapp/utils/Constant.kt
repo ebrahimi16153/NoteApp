@@ -3,7 +3,14 @@ package com.github.ebrahimi16153.noteapp.utils
 object Constant {
 
 
+    val ID_KEY = "note_id"
+
+    // popup menu status
+    const val EDIT = "edite"
+    const val DELETE = "delete"
+
     //category
+    const val ALL = "all"
     const val WORK = "Work"
     const val EDUCATION = "Education"
     const val HOME = "Home"
