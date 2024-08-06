@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
             //show all notes
             viewModel.getAllNotes()
             viewModel.notes.observe(this@MainActivity) {
-                showAllNotes(it)
+                showAllNotes(it.data!!, it.isEmpty)
             }
 //            click on filter
             notesToolbar.setOnMenuItemClickListener {
@@ -80,7 +80,10 @@ class MainActivity : AppCompatActivity() {
 
                         return@setOnMenuItemClickListener true
                     }
-                    else -> { return@setOnMenuItemClickListener false }
+
+                    else -> {
+                        return@setOnMenuItemClickListener false
+                    }
                 }
             }
 
@@ -89,11 +92,11 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun showAllNotes(list: MutableList<NoteModel>) {
+    private fun showAllNotes(list: MutableList<NoteModel>, isEmpty: Boolean = true) {
         Log.i("TAG", "TAG")
 
         binding?.apply {
-            if (list.isNotEmpty()) {
+            if (!isEmpty) {
                 emptyLay.visibility = View.INVISIBLE
                 noteList.visibility = View.VISIBLE
                 noteAdapter.setData(list)
@@ -137,19 +140,27 @@ class MainActivity : AppCompatActivity() {
         val listOfPriority = arrayOf(ALL, HIGH, MEDIUM, LOW)
         builder.setSingleChoiceItems(listOfPriority, selectedItem) { dialog, item ->
             when (item) {
-                0 -> { priority(ALL) }
+                0 -> {
+                    priority(ALL)
+                }
 
-                1 -> { priority(HIGH) }
+                1 -> {
+                    priority(HIGH)
+                }
 
-                2 -> { priority(MEDIUM) }
+                2 -> {
+                    priority(MEDIUM)
+                }
 
-                3 -> { priority(LOW) }
+                3 -> {
+                    priority(LOW)
+                }
             }
             selectedItem = item
             dialog.dismiss()
 
         }
-        val dialog:AlertDialog = builder.create()
+        val dialog: AlertDialog = builder.create()
         dialog.show()
         //change background dialog
         dialog.window?.setBackgroundDrawableResource(R.color.background)

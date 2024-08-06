@@ -7,6 +7,7 @@ import com.github.ebrahimi16153.noteapp.data.model.NoteModel
 import com.github.ebrahimi16153.noteapp.data.repository.MainRepository
 import com.github.ebrahimi16153.noteapp.data.repository.NoteRepository
 import com.github.ebrahimi16153.noteapp.utils.Constant
+import com.github.ebrahimi16153.noteapp.utils.NoteWrapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.Dispatchers
@@ -18,13 +19,13 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(private val repository: MainRepository) : ViewModel() {
 
 
-    val notes = MutableLiveData<MutableList<NoteModel>>()
+    val notes = MutableLiveData<NoteWrapper<MutableList<NoteModel>>>()
 
 
-    fun getAllNotes() = viewModelScope.launch(Dispatchers.IO) {
+    fun getAllNotes() = viewModelScope.launch(Dispatchers.Main) {
 
         repository.getNotes().collectLatest {
-            notes.postValue(it)
+            notes.postValue(NoteWrapper.success(data = it,it.isEmpty()))
         }
     }
 
@@ -34,15 +35,15 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
     }
 
 
-    fun searchNote(searchQuery: String) = viewModelScope.launch(Dispatchers.IO) {
+    fun searchNote(searchQuery: String) = viewModelScope.launch(Dispatchers.Main) {
         repository.getSearchNote(searchQuery).collectLatest {
-            notes.postValue(it)
+           notes.postValue(NoteWrapper.success(data = it,it.isEmpty()))
         }
     }
 
-    fun filterNoteByPriority(priority: String) = viewModelScope.launch(Dispatchers.IO) {
+    fun filterNoteByPriority(priority: String) = viewModelScope.launch(Dispatchers.Main) {
         repository.filterByPriority(priority = priority).collectLatest {
-            notes.postValue(it)
+            notes.postValue(NoteWrapper.success(data = it,it.isEmpty()))
         }
 
     }

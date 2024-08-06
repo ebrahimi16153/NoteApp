@@ -82,12 +82,8 @@ class NoteAdapter @Inject constructor(): RecyclerView.Adapter<NoteAdapter.ViewHo
 
             //onItemClickListener
             binding.root.setOnClickListener {
-                onItemClickListener?.let {
-                    it(item,Constant.EDIT)
-                }
+                onItemClickListener?.let { it(item,Constant.EDIT) }
             }
-
-
         }
 
     }
@@ -110,7 +106,6 @@ class NoteAdapter @Inject constructor(): RecyclerView.Adapter<NoteAdapter.ViewHo
 
     class MovieListDiffer(private val oldItems: List<NoteModel>, private val newItems: List<NoteModel>) :
         DiffUtil.Callback() {
-
 
         override fun getOldListSize() = oldItems.size
 
